@@ -18,4 +18,34 @@ module hidden_layer #(
     
     wire [15:0] address_sum;
     wire [7:0] activated_sum; //sum after activation
-    
+
+    //Multiply input by each neuron weight
+    genvar i;
+    generate 
+        for (i=0; i<37; i=i+1) begin : multiplier_gen
+            multiplier #(
+                .weight(weightsIn[i])
+            ) mult_inst (
+                .clk(clk),
+                .data_in(dataIn[i]),
+                .data_out(accumulated_sum[i])
+            );
+         end 
+    endgenerate
+
+
+    always @(posedge clk) begin 
+
+    end 
+
+    always @(posedge clk) begin
+
+    end
+
+    sigmoid_IP sigmoid_inst (
+
+    ); 
+
+    assign neuron_output = activated_sum; //set output to sum after activation
+
+endmodule 
