@@ -35,7 +35,13 @@ module hidden_layer #(
 
 
     always @(posedge clk) begin 
-
+        if (activated_sum < sumMin) begin 
+            //if less than min set 0
+        end else if (activated_sum > sumMax) begin 
+            //if max set upper bound infinity
+        end else begin 
+            address_sum = //set address
+        end 
     end 
 
     always @(posedge clk) begin
