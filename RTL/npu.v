@@ -49,7 +49,8 @@ network nn_inst (
     .linear_mem6(linear_mem6),
     .symbol1(symbol1),
     .symbol2(symbol2),
-    .symbol3(symbol3) 
+    .symbol3(symbol3),
+    .symbol4(symbol4)
 );
 
 //delay pixel output until neural network is done with classification
