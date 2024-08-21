@@ -1,4 +1,4 @@
-module linemem (
+module linear_memory (
     input wire clk,
     input wire reset,
     input wire write_enable, 
@@ -17,9 +17,11 @@ always @(posedge clk or posedge reset) begin
         //reset everything if reset
     end else if (write_enable) begin 
         //if write, write to memory
+        //update addresses
+        write_address <= (write_address == 1279) ? 0 : write_address + 1;
+        read_address <= (read_address == 1279) ? 0 : read_address + 1;
     end 
 
-    //update addresses
 end
 
 endmodule 
