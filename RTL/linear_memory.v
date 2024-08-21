@@ -15,8 +15,12 @@ reg [10:0] write_address, read_address;
 always @(posedge clk or posedge reset) begin 
     if (reset) begin 
         //reset everything if reset
+        write_address <= 0;
+        read_address <= 1;
     end else if (write_enable) begin 
         //if write, write to memory
+        data_out <= sram[read_address];
+        sram[write_address] <= data_in;
         //update addresses
         write_address <= (write_address == 1279) ? 0 : write_address + 1;
         read_address <= (read_address == 1279) ? 0 : read_address + 1;
