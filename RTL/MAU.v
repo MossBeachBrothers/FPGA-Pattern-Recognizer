@@ -30,8 +30,17 @@ module MAU (
     wire [7:0] tap_66; //input for bottom-right pixel of grid
 
 
+
     //Line Memory Modules. The first pixel array does not need to be delayed, as it is accessed directly 
     linear_memory mem1 (
+        .clk(clk),
+        .reset(reset)
+        write_enable(data_enable),
+        .data_in(tap_66),
+        .data_out(cell_56)
+    );
+    
+    linear_memory mem2 (
         .clk(clk),
         .reset(reset)
         write_enable(data_enable),
@@ -39,7 +48,7 @@ module MAU (
         .data_out(cell_46)
     );
 
-    linear_memory mem2 (
+    linear_memory mem3 (
         .clk(clk),
         .reset(reset)
         write_enable(data_enable),
@@ -47,21 +56,12 @@ module MAU (
         .data_out(cell_36)
     );
 
-    linear_memory mem3 (
+    linear_memory mem4 (
         .clk(clk),
         .reset(reset)
         write_enable(data_enable),
         .data_in(cell_36),
         .data_out(cell_26)
-    );
-
-
-    linear_memory mem4 (
-        .clk(clk),
-        .reset(reset)
-        write_enable(data_enable),
-        .data_in(),
-        .data_out()
     );
 
     linear_memory mem5 (
@@ -107,7 +107,7 @@ module MAU (
 
     always @(posedge clk) begin
         //assign cell values to line memory outputs
-        linear_mem1<= {cell_00, cell_01, cell_02, cell_03, cell_04, cell_05, cell_06};
+        linear_mem1 <= {cell_00, cell_01, cell_02, cell_03, cell_04, cell_05, cell_06};
         linear_mem2 <= {cell_10, cell_11, cell_12, cell_13, cell_14, cell_15, cell_16};
         linear_mem3 <= {cell_20, cell_21, cell_22, cell_23, cell_24, cell_25, cell_26};
         linear_mem4 <= {cell_30, cell_31, cell_32, cell_33, cell_34, cell_35, cell_36};
